@@ -1,19 +1,63 @@
-![alt text](https://linuxscriptshub.com/wp-content/uploads/2017/04/Nginx-Logo.png)
-# A simple Auth server for NIGNX RTMP server
+![Nginx Logo](https://linuxscriptshub.com/wp-content/uploads/2017/04/Nginx-Logo.png)
 
-Things you need 
+# Simple Authentication Server for Nginx RTMP
 
-Node.JS
+## Prerequisites
 
-WIndows / Unix Server
+- Node.js
+- Windows or Unix Server
+- Nginx
+- MySQL Database
 
-And NGINX
+## Installation
 
+1. Clone or download the repository.
+2. Install dependencies using npm:
 
-npm download
-Use npm starts
+```bash
+npm install
 
-Add this to the Conf file
+    Set up your MySQL database and update the configuration in config.js with your database credentials and details.
+
+Usage
+
+Start the authentication server:
+
+bash
+
+npm start
+
+Configuration
+
+Add the following line to your Nginx configuration file (nginx.conf or a separate file included in your main configuration):
+
+nginx
+
 on_publish http://localhost:5000/auth;
 
-Forks are welcome
+This line directs Nginx to send a request to the authentication server when a stream is published.
+SQL Integration
+
+    Ensure your MySQL server is running and accessible.
+    Create a database and a table to store user data. For example:
+
+sql
+
+CREATE DATABASE streaming;
+USE streaming;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  streamkey VARCHAR(255) NOT NULL
+);
+
+    Insert some test data:
+
+sql
+
+INSERT INTO users (streamkey) VALUES ('your_stream_key');
+
+Replace 'your_stream_key' with the actual stream key you want to use for testing.
+Contributing
+
+Contributions and forks are welcome! If you have any improvements or suggestions, feel free to submit a pull request.
